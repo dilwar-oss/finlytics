@@ -341,10 +341,10 @@ def init_db():
                 )
                 conn.commit()
             else:
-                if row.get("password_hash") is None:
+                if row[1] is None:
                     cur.execute("UPDATE users SET password_hash = %s WHERE email = %s", (generate_password_hash("demo1234"), "demo@finlytics.app"))
                     conn.commit()
-                if not row.get("is_admin"):
+                if not row[2]:
                     cur.execute("UPDATE users SET is_admin = TRUE WHERE email = %s", ("demo@finlytics.app",))
                     conn.commit()
             # Promote ADMIN_EMAILS env
